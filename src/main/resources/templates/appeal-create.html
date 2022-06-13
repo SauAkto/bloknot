@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<form action="#" th:action="@{/appeal-create}" th:object="${appeal}" method="post">
+        <h2>Новый запрос</h2>
+        <table id="table">
+            <tbody>
+            <tr>
+                <td style="width: auto"><input type="text" th:field="*{statys}" id="statys" placeholder="Статус"></td>
+                <td style="width: auto"><input type="text" th:field="*{date}" id="date" placeholder="Дата"></td>
+                <td style="width: auto"><input type="text" th:field="*{client}" id="client" placeholder="Клиент"></td>
+                <td style="width: auto"><input type="text" th:field="*{mobile}" id="mobile" placeholder="89003332244"></td>
+                <td style="width: auto"><input type="text" th:field="*{email}" id="email" placeholder="e-mail"></td>
+                <td style="width: auto"><input type="text" th:field="*{request}" id="request" placeholder="Потребность"></td>
+                <td style="width: auto"><input type="text" th:field="*{answer}" id="answer" placeholder="Ответ"></td>
+                <td style="width: auto"><input type="text" th:field="*{next_date}" id="next_date" placeholder="Контрольная дата"></td>
+            </tr>
+            </tbody>
+        </table>
+    <br>
+    <input type="submit" value="Create appeal">
+</form>
+</body>
+</html>
