@@ -1,54 +1,63 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title> Записная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
+
 <body>
 <div th:switch="${appeals}">
     <h2 th:case="null">No appeals found!</h2>
     <div th:case="*">
-        <h2>Текущие запросы</h2>
-        <table id="table">
-            <thead>
-            <tr>
-                <td style="width: 7.18565%;">Статус:</td>
-                <td style="width: 7.18565%;">Дата:</td>
-                <td style="width: 6.4371%;">Клиент:</td>
-                <td style="width: 6.4371%;">Телефон:</td>
-                <td style="width: 12.8368%;">E-mail:</td>
-                <td style="width: 12.8368%;">Потребность:</td>
-                <td style="width: 25.6736%;">Ответ:</td>
-                <td style="width: 10.7036%;">Контрольная дата:</td>
-                <td style="width: 10.7036%;">
-                    <p>изменить</p>
-                    <p>удалить</p>
-                    <p>сохранить</p>
-                </td>
-            </tr>
-            </thead>
+        <table style="border-collapse: collapse; width: 90%; height: 56px;" border="1">
             <tbody>
-            <tr th:each="appeal : ${appeals}">
-                <td th:text="${appeal.statys}" style="width: auto">Статус</td>
-                <td th:text="${appeal.date}" style="width: auto">Дата</td>
-                <td th:text="${appeal.client}" style="width: auto">Клиент</td>
-                <td th:text="${appeal.mobile}" style="width: auto">Телефон</td>
-                <td th:text="${appeal.email}" style="width: auto">емейл</td>
-                <td th:text="${appeal.request}" style="width: auto">Потребность</td>
-                <td th:text="${appeal.answer}" style="width: auto">Ответ</td>
-                <td th:text="${appeal.next_date}" style="width: auto">Контрольная дата</td>
-                <td style="width: auto">
-                    <a th:href="@{appeal-update/{id}(id=${appeal.id})}">изменить</a>
-                    <a th:href="@{appeal-delete/{id}(id=${appeal.id})}">удалить</a>
+            <tr>
+                <td style="width: 100%;">шапка</td>
+            </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; width: 90%; height: 409px;" border="1">
+            <tbody>
+            <tr style="height: 409px;">
+                <td style="width: 20%; height: 409px;">записная</td>
+                <td style="width: 80%; height: 409px;">
+                    <table style="border-collapse: collapse; width: 100.191%; height: 93px;" border="1" th:each="appeal : ${appeals}">
+                        <tbody>
+                        <tr style="height: auto;">
+                            <td style="width: 14.5038%; height: 93px;">
+                                <div th:text="${appeal.date}" style="width: auto"><p>дата</p></div>
+                                <div th:text="${appeal.statys}" style="width: auto"><p>статус</p></div>
+                                <div th:text="${appeal.next_date}" style="width: auto"><p>контр дата</p></div>
+                            </td>
+                            <td style="width: 12.4046%; height: 93px;">
+                                <div th:text="${appeal.client}" style="width: auto"><p>клиент</p></div>
+                                <div th:text="${appeal.mobile}" style="width: auto"><p>телефон</p></div>
+                                <div th:text="${appeal.email}" style="width: auto"><p>почта</p></div>
+                            </td>
+                            <td th:text="${appeal.request}" style="width: 20%; height: 93px;">запрос</td>
+                            <td th:text="${appeal.answer}" style="width: 40%; height: 93px;">ответ</td>
+                            <td style="width: auto; height: auto;">
+                                <p><a th:href="@{appeal-update/{id}(id=${appeal.id})}">изменить</a></p>
+                                <p><a th:href="@{appeal-delete/{id}(id=${appeal.id})}">удалить</a></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
     <p><a href="/appeal-create">Новое обращение</a> </p>
 </div>
 </body>
 </html>
+
+
+
+
+

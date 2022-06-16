@@ -44,4 +44,17 @@ public class AppealController {
         appealService.deleteById(id);
         return "redirect:/appeals";
     }
+
+    @GetMapping("/appeal-update/{id}")
+    public String updateAppealsForm(@PathVariable("id") Long id, Model model){
+        Appeal appeal = appealService.findById(id);
+        model.addAttribute("appeal", appeal);
+        return "appeal-update";
+    }
+
+    @PostMapping("appeal-update")
+    public String updateAppeal(Appeal appeal){
+        appealService.saveAppeal(appeal);
+        return "redirect:/appeals";
+    }
 }

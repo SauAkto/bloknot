@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Записная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+<form action="#" th:action="@{/appeal-update}" th:object="${appeal}" method="post">
+    <div th:switch="${appeal}">
+        <h2 th:case="null">No appeals found!</h2>
+        <div th:case="*">
+            <table style="border-collapse: collapse; width: 90%; height: 56px;" border="1">
+                <tbody>
+                <tr>
+                    <td style="width: 100%;">шапка</td>
+                </tr>
+                </tbody>
+            </table>
+            <table style="border-collapse: collapse; width: 90%; height: 409px;" border="1">
+                <tbody>
+                <tr style="height: 409px;">
+                    <td style="width: 20%; height: 409px;">записная</td>
+                    <td style="width: 80%; height: 409px;">
+                        <table style="border-collapse: collapse; width: 100.191%; height: 93px;" border="1">
+                            <tbody>
+                            <tr style="height: auto;">
+                                <td style="width: 14.5038%; height: 93px;">
+                                    <div style="width: auto"><input type="text" th:field="*{date}"></div>
+                                    <div style="width: auto"><input type="text" th:field="*{statys}" ></div>
+                                    <div style="width: auto"><input type="text" th:field="*{next_date}" ></div>
+                                </td>
+                                <td style="width: 12.4046%; height: 93px;">
+                                    <div style="width: auto"><input type="text" th:field="*{client}"></div>
+                                    <div style="width: auto"><input type="text" th:field="*{mobile}"></div>
+                                    <div style="width: auto"><input type="text" th:field="*{email}"></div>
+                                </td>
+                                <td style="width: 20%; height: 93px;"><input type="text" th:field="*{request}"></td>
+                                <td style="width: 40%; height: 93px;"><input type="text" th:field="*{answer}"></td>
+                                <td style="width: auto; height: auto;">
+                                    <p><input type="submit" value="save"></p>
+                                    <p><a th:href="@{appeal-delete/{id}(id=${appeal.id})}">удалить</a></p>
+                                    <p><input readonly type="text" th:field="*{id}" id="id"</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
 </body>
 </html>
