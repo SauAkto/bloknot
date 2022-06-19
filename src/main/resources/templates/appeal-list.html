@@ -5,12 +5,13 @@
 <head>
     <title> Записная</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
 
 <body>
-<div th:switch="${appeals}">
+<form action="#" th:name="create"  th:object="${zapiskas}" method="post">
+<div th:switch="${appeals}" >
     <h2 th:case="null">No appeals found!</h2>
     <div th:case="*">
         <table style="border-collapse: collapse; width: 90%; height: 56px;" border="1">
@@ -23,7 +24,9 @@
         <table style="border-collapse: collapse; width: 90%; height: 409px;" border="1">
             <tbody>
             <tr style="height: 409px;">
-                <td style="width: 20%; height: 409px;">записная</td>
+                <td style="width: 20%; height: 409px;">
+                    <div style="width: auto"><input type="text" th:field="*{zametki}" id="zapisnaya"></div>
+                </td>
                 <td style="width: 80%; height: 409px;">
                     <table style="border-collapse: collapse; width: 100.191%; height: 93px;" border="1" th:each="appeal : ${appeals}">
                         <tbody>
@@ -41,8 +44,8 @@
                             <td th:text="${appeal.request}" style="width: 20%; height: 93px;">запрос</td>
                             <td th:text="${appeal.answer}" style="width: 40%; height: 93px;">ответ</td>
                             <td style="width: auto; height: auto;">
-                                <p><a th:href="@{appeal-update/{id}(id=${appeal.id})}">изменить</a></p>
-                                <p><a th:href="@{appeal-delete/{id}(id=${appeal.id})}">удалить</a></p>
+                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/{ind}(ind='1')/{id}(id=${appeal.id})}" value="Изменить"></p>
+                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/{ind}(ind='2')/{id}(id=${appeal.id})}" value="Удалить"></p>
                             </td>
                         </tr>
                         </tbody>
@@ -52,8 +55,10 @@
             </tbody>
         </table>
     </div>
-    <p><a href="/appeal-create">Новое обращение</a> </p>
+    <br>
+    <input type="submit" th:name="create" th:formaction="@{/appeals}" value="Create appeal">
 </div>
+</form>
 </body>
 </html>
 
