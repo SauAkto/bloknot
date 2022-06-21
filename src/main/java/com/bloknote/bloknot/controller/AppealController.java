@@ -40,18 +40,31 @@ public class AppealController {
         return "appeal-create";
     }
 
-    @PostMapping("/appeals/{ind}/{id}")
-    public String saveZaAppealsUpdate(@PathVariable("id") Long id, @PathVariable("ind") String ind, Zapiska zapiska){
+    @PostMapping("/appeals/2/{id}")
+    public String saveZaAppealsDelete(@PathVariable("id") Long id, Zapiska zapiska) {
         zapiska.setId(1l);
         zapiskaService.saveZapiska(zapiska);
-        String urlAdr = "";
-        String idi = Long.toString(id);
-        if(ind == "1"){
-            urlAdr = "appeal-update/"+idi; }
-        if(ind == "2"){
-            urlAdr = "appeal-delete/"+idi; }
-        return urlAdr;
-        }
+        appealService.deleteById(id);
+        return "redirect:/appeals";
+    }
+
+    @PostMapping("/appeals/1/{id}")
+    public String saveZaAppealsUpdate(@PathVariable("id") Long id, Zapiska zapiska, Model model) {
+        zapiska.setId(1l);
+        zapiskaService.saveZapiska(zapiska);
+        Appeal appeal = appealService.findById(id);
+        model.addAttribute("appeal", appeal);
+        model.addAttribute("zapiska", zapiska);
+        return "appeal-update";
+    }
+
+    @PostMapping("appeal-update")
+    public String updateAppeal(Appeal appeal, Zapiska zapiska){
+        zapiska.setId(1l);
+        zapiskaService.saveZapiska(zapiska);
+        appealService.saveAppeal(appeal);
+        return "redirect:/appeals";
+    }
 
     @GetMapping("/appeal-create")
     public String createAppealForm(Model model){
@@ -68,22 +81,5 @@ public class AppealController {
         return "redirect:/appeals";
     }
 
-    @GetMapping("/appeal-delete/{id}")
-    public String deleteAppeal(@PathVariable("id") Long id){
-        appealService.deleteById(id);
-        return "redirect:/appeals";
-    }
 
-    @GetMapping("/appeal-update/{id}")
-    public String updateAppealsForm(@PathVariable("id") Long id, Model model){
-        Appeal appeal = appealService.findById(id);
-        model.addAttribute("appeal", appeal);
-        return "appeal-update";
-    }
-
-    @PostMapping("appeal-update")
-    public String updateAppeal(Appeal appeal){
-        appealService.saveAppeal(appeal);
-        return "redirect:/appeals";
-    }
 }

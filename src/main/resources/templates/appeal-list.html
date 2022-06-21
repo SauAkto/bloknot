@@ -44,8 +44,8 @@
                             <td th:text="${appeal.request}" style="width: 20%; height: 93px;">запрос</td>
                             <td th:text="${appeal.answer}" style="width: 40%; height: 93px;">ответ</td>
                             <td style="width: auto; height: auto;">
-                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/{ind}(ind='1')/{id}(id=${appeal.id})}" value="Изменить"></p>
-                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/{ind}(ind='2')/{id}(id=${appeal.id})}" value="Удалить"></p>
+                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/1/{id}(id=${appeal.id})}" value="Изменить"></p>
+                                <p><input type="submit" th:name="create" th:formaction="@{/appeals/2/{id}(id=${appeal.id})}" value="Удалить"></p>
                             </td>
                         </tr>
                         </tbody>
