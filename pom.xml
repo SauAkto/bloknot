@@ -14,7 +14,9 @@
     <name>bloknot</name>
     <description>bloknot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
+        <mysql.connector.version>8.0.15</mysql.connector.version>
+        <jsonwebtoken.version>0.8.0</jsonwebtoken.version>
     </properties>
     <dependencies>
         <dependency>
@@ -32,7 +34,12 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>${mysql.connector.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jsonwebtoken.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -49,11 +56,9 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
         </dependency>
-
-
 
     </dependencies>
 
