@@ -1,10 +1,13 @@
 package com.bloknote.bloknot.security.jwt;
 
 import com.bloknote.bloknot.model.Role;
+import com.bloknote.bloknot.security.JwtUserDetailsService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +34,11 @@ public class JwtTokenProvider {
 
     @Value("${jwt.token.expired}")
     private long validitiInMilicecond;
+
+//    @Autowired
+//    public JwtTokenProvider(UserDetailsService userDetailsService) {
+//        this.userDetailsService = userDetailsService;
+//    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -86,7 +94,7 @@ public class JwtTokenProvider {
             }
             return true;
         }catch (JwtException | IllegalArgumentException e){
-            throw new JwtAuthenticationException("JWT token is expired or invalid");
+            throw new JwtAuthenticationException("JWT token is expired or invalid", HttpStatus.UNAUTHORIZED);
         }
     }
 
